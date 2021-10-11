@@ -7,12 +7,14 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "test": "jest --forceExit --detectOpenHandles"
   },
   "dependencies": {
+    "jest": "^27.2.5",
     "knex": "0.21.18",
     "pg": "^8.7.1",
-    "sqlite3": "5.0.0",
+    "sqlite3": "^5.0.0",
     "strapi": "3.6.8",
     "strapi-admin": "3.6.8",
     "strapi-connector-bookshelf": "3.6.8",
@@ -22,7 +24,8 @@
     "strapi-plugin-i18n": "3.6.8",
     "strapi-plugin-upload": "3.6.8",
     "strapi-plugin-users-permissions": "3.6.8",
-    "strapi-utils": "3.6.8"
+    "strapi-utils": "3.6.8",
+    "supertest": "^6.1.6"
   },
   "author": {
     "name": "A Strapi developer"
@@ -33,6 +36,14 @@
   "engines": {
     "node": ">=10.16.0 <=14.x.x",
     "npm": "^6.0.0"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      ".tmp",
+      ".cache"
+    ],
+    "testEnvironment": "node"
   },
   "license": "MIT"
 }
