@@ -2,10 +2,10 @@
 steps:
     # build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/relic-finder-test/cms/strapi:production', '.' ]
+    args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/cms/strapi:production', '.' ]
     # push the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'push', 'us-central1-docker.pkg.dev/$PROJECT_ID/relic-finder-test/cms/strapi:production']
+    args: [ 'push', 'us-central1-docker.pkg.dev/$PROJECT_ID/cms/strapi:production']
     # deploy to Cloud Run
   - name: "gcr.io/cloud-builders/gcloud"
-    args: ['run', 'deploy', 'strapi', '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/relic-finder-test/cms/strapi:production', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
+    args: ['run', 'deploy', 'strapi', '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/cms/strapi:production', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
