@@ -2,10 +2,10 @@
 steps:
     # build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/cms/strapi:production', '.' ]
+    args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/cms/strapi:latest', '.' ]
     # push the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'push', 'us-central1-docker.pkg.dev/$PROJECT_ID/cms/strapi:production']
+    args: [ 'push', 'us-central1-docker.pkg.dev/$PROJECT_ID/cms/strapi:latest']
     # deploy to Cloud Run
   - name: "gcr.io/cloud-builders/gcloud"
-    args: ['run', 'deploy', 'strapi', '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/cms/strapi:production', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
+    args: ['run', 'deploy', 'strapi-staging', '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
