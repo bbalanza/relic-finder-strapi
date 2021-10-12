@@ -8,6 +8,7 @@ stages:
 test:
   stage: test
   script:
+  - apt install npm
   - npm test
 
 deploy:
