@@ -1,15 +1,15 @@
-const fs = require('fs');
-const { setupStrapi } = require('./helpers/strapi');
+const fs = require("fs");
+const { setupStrapi } = require("./helpers/strapi");
 
-/** this code is called once before any test is called */
+jest.setTimeout(15000);
 beforeAll(async () => {
   await setupStrapi(); // singleton so it can be called many times
 });
 
 /** this code is called once before all the tested are finished */
 afterAll(async () => {
-  const dbSettings = strapi.config.get('database.connections.default.settings');
-  
+  const dbSettings = strapi.config.get("database.connections.default.settings");
+
   //close server to release the db-file
   await strapi.destroy();
 
@@ -22,6 +22,6 @@ afterAll(async () => {
   }
 });
 
-it('strapi is defined', () => {
+it("strapi is defined", () => {
   expect(strapi).toBeDefined();
 });
