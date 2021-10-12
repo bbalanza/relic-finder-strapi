@@ -1,5 +1,5 @@
 # File: .gitlab-ci.yml
-image: alpine:latest
+image: node:12-alpine
 
 stages:
   - test
@@ -8,7 +8,7 @@ stages:
 test:
   stage: test
   script:
-  - apt install npm
+  - npm install
   - npm test
 
 deploy:
