@@ -1,5 +1,8 @@
-# File: .gitlab-ci.yml
-image: node:12-alpine
+image: docker:latest
+
+include:
+  - template: Secret-Detection.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
 
 stages:
   - test
@@ -7,9 +10,10 @@ stages:
 
 test:
   stage: test
+  image: node:12-alpine
   script:
-  - npm install
-  - npm test
+    - npm install
+    - npm test
 
 deploy:
   stage: deploy
@@ -17,7 +21,7 @@ deploy:
   services:
     - docker:dind
   script:
-    - echo $GCP_SERVICE_KEY > gcloud-service-key.json # Google Cloud service accounts
+    - echo $GCP_SERVICE_KEY > gcloud-service-key.json 
     - gcloud auth activate-service-account --key-file gcloud-service-key.json
     - gcloud config set project $GCP_PROJECT_ID
     - gcloud builds submit . --config=cloudbuild.yaml
