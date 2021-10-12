@@ -23,10 +23,10 @@ deploy:
   rules:
     - if: $CI_COMMIT_BRANCH == "staging"
       variables:
-        _ENV: $CI_ENVIRONMENT_NAME
+        _ENV: staging
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       variables:
-        _ENV: $CI_ENVIRONMENT_NAME
+        _ENV: production
   environment:
     name: $_ENV
     url: https://strapi-$_ENV-5tz4r7de4a-uc.a.run.app
@@ -35,4 +35,4 @@ deploy:
     - echo $GCP_SERVICE_KEY > gcloud-service-key.json 
     - gcloud auth activate-service-account --key-file gcloud-service-key.json
     - gcloud config set project $GCP_PROJECT_ID
-    - gcloud builds submit . --config=cloudbuild.yaml --substitutions=_ENVIRONMENT=$ENVIRONMENT
+    - gcloud builds submit . --config=cloudbuild.yaml --substitutions=_ENVIRONMENT=$_ENV
