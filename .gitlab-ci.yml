@@ -40,17 +40,14 @@ deploy:
     - docker:dind
   rules:
     if: 'CI_COMMIT_BRANCH == "staging"'
-      environment:
-        name: staging
-        url: https://strapi-staging-5tz4r7de4a-uc.a.run.app
       variables:
-        ENVIRONMENT: $CI_ENVIRONMENT_NAME
+        _ENV: $CI_ENVIRONMENT_NAME
     if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-      environment:
-        name: production
-        url: https://strapi-production-5tz4r7de4a-uc.a.run.app
       variables:
-        ENVIRONMENT: $CI_ENVIRONMENT_NAME
+        _ENV: $CI_ENVIRONMENT_NAME
+  environment:
+    name: $_ENV
+    url: https://strapi-$_ENV-5tz4r7de4a-uc.a.run.app
   script:
     - echo "Deplyoing to staging server"
     - echo $GCP_SERVICE_KEY > gcloud-service-key.json 
