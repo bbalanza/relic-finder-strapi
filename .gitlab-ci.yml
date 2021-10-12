@@ -2,7 +2,13 @@
 image: docker:latest
 
 stages:
+  - test
   - deploy
+
+test:
+  stage: test
+  script:
+  - npm test
 
 deploy:
   stage: deploy
