@@ -21,17 +21,17 @@ deploy:
   services:
     - docker:dind
   rules:
-    - if: 'CI_COMMIT_BRANCH == "staging"'
+    - if: $CI_COMMIT_BRANCH == "staging"
       variables:
         _ENV: $CI_ENVIRONMENT_NAME
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       variables:
         _ENV: $CI_ENVIRONMENT_NAME
   environment:
     name: $_ENV
     url: https://strapi-$_ENV-5tz4r7de4a-uc.a.run.app
   script:
-    - echo "Deplyoing to staging server"
+    - echo "Deplyoing to $_ENV"
     - echo $GCP_SERVICE_KEY > gcloud-service-key.json 
     - gcloud auth activate-service-account --key-file gcloud-service-key.json
     - gcloud config set project $GCP_PROJECT_ID
