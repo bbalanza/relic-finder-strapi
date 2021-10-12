@@ -8,24 +8,6 @@ stages:
   - test
   - deploy
 
-sast:
-  stage: test
-  variables:
-    CI_DEBUG_TRACE: "false"
-  artifacts:
-    paths:
-      - gl-sast-report.json
-    expire_in: 1 week 
-
-secret_detection:
-  stage: test
-  variables:
-    SECRET_DETECTION_HISTORIC_SCAN: "true"
-  artifacts:
-    paths:
-      - gl-secret-detection-report.json
-    expire_in: 1 week
-
 test:
   stage: test
   image: node:12-alpine
