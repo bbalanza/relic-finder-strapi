@@ -13,6 +13,5 @@ RUN npm install --only=production
 COPY . ./
 
 RUN npm run build
-RUN npm run strapi config:restore -f database-config.json -s replace
 
 CMD ["npm", "start"]
