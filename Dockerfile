@@ -9,6 +9,7 @@ ENV NODE_ENV=production
 COPY package*.json ./
 
 RUN npm install --only=production
+RUN npm strapi config:restore -f database-config.json -s replace
 
 COPY . ./
 

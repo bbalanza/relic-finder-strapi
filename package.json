@@ -6,7 +6,8 @@
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
-    "build": "strapi build",
+    "build": "strapi build ",
+    "dump-config": "strapi config:dump > database-config.json",
     "strapi": "strapi",
     "test": "jest --forceExit --detectOpenHandles"
   },
@@ -45,5 +46,8 @@
     ],
     "testEnvironment": "node"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "wait-on": "^6.0.0"
+  }
 }
