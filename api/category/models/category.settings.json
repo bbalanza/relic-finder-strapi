@@ -1,9 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "relics",
+  "collectionName": "categories",
   "info": {
-    "name": "Relic",
-    "description": ""
+    "name": "Category"
   },
   "options": {
     "increments": true,
@@ -17,13 +16,15 @@
       "required": true,
       "unique": true
     },
-    "categories": {
-      "via": "relics",
-      "collection": "category"
-    },
     "description": {
       "type": "richtext",
+      "unique": false,
       "required": true
+    },
+    "relics": {
+      "via": "categories",
+      "collection": "relic",
+      "dominant": true
     }
   }
 }
