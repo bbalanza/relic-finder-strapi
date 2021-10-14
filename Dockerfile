@@ -9,10 +9,10 @@ ENV NODE_ENV=production
 COPY package*.json ./
 
 RUN npm install --only=production
-RUN npm strapi config:restore -f database-config.json -s replace
 
 COPY . ./
 
 RUN npm run build
+RUN npm run strapi config:restore -f database-config.json -s replace
 
 CMD ["npm", "start"]
