@@ -1,11 +1,7 @@
-# File: cloudbuild.yaml
 steps:
-    # build the container image
-  - name: 'gcr.io/cloud-builders/docker'
+  - name: 'build the container image'
     args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest', '.' ]
-    # push the container image
-  - name: 'gcr.io/cloud-builders/docker'
+  - name: 'push the container image'
     args: [ 'push', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest']
-    # deploy to Cloud Run
-  - name: "gcr.io/cloud-builders/gcloud"
+  - name: "deploy to Cloud Run"
     args: ['run', 'deploy', 'strapi-${_ENVIRONMENT}', '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
