@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "relics",
   "info": {
-    "name": "Relic"
+    "name": "Relic",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -15,6 +16,25 @@
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "categories": {
+      "via": "relics",
+      "collection": "category"
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "images": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
     }
   }
 }
