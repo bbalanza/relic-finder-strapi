@@ -6,7 +6,7 @@
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
-    "build": "strapi build ",
+    "build": "strapi build",
     "strapi": "strapi",
     "test": "jest --forceExit --detectOpenHandles"
   },
@@ -22,7 +22,6 @@
     "strapi-plugin-content-type-builder": "3.6.8",
     "strapi-plugin-email": "3.6.8",
     "strapi-plugin-i18n": "3.6.8",
-    "strapi-plugin-migrate": "^3.6.3",
     "strapi-plugin-upload": "3.6.8",
     "strapi-plugin-users-permissions": "3.6.8",
     "strapi-utils": "3.6.8",
