@@ -1,7 +1,7 @@
 steps:
-  - name: 'google/cloud-sdk:alpine'
+  - name: 'gcr.io/cloud-builders/gcloud'
     args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest', '.' ]
-  - name: 'google/cloud-sdk:alpine'
+  - name: 'gcr.io/cloud-builders/gcloud'
     args: [ 'push', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest']
-  - name: "google/cloud-sdk:alpine"
+  - name: "gcr.io/cloud-builders/gcloud"
     args: ['run', 'deploy', 'strapi-${_ENVIRONMENT}', '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
