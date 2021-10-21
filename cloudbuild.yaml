@@ -1,7 +1,7 @@
 steps:
-  - name: 'build the container image'
+  - name: 'google/cloud-sdk:alpine'
     args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest', '.' ]
-  - name: 'push the container image'
+  - name: 'google/cloud-sdk:alpine'
     args: [ 'push', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest']
-  - name: "deploy to Cloud Run"
+  - name: "google/cloud-sdk:alpine"
     args: ['run', 'deploy', 'strapi-${_ENVIRONMENT}', '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
