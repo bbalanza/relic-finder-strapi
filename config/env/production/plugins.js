@@ -3,7 +3,7 @@ module.exports = {
         provider: 'google-cloud-storage',
         providerOptions: {
             bucketName: 'relic-finder-staging-media',
-            publicFiles: false,
+            publicFiles: true,
             uniform: true,
             basePath: '',
         },
