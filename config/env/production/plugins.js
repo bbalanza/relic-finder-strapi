@@ -4,7 +4,7 @@ module.exports = {
         providerOptions: {
             bucketName: 'relic-finder-staging-media',
             publicFiles: false,
-            uniform: false,
+            uniform: true,
             basePath: '',
         },
     },
