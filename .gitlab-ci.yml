@@ -19,7 +19,7 @@ test:
 
 deploy:
   stage: deploy
-  image: google/cloud-sdk
+  image: google/cloud-sdk:alpine
   services:
     - docker:dind
   environment:
