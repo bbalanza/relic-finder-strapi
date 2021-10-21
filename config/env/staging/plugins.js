@@ -1,6 +1,14 @@
-import '../production/plugins'
-
-module.exports = ({ env }) => ({
-  defaultConnection: 'default',
-  connections: getProdConnections(env), 
-});
+getStoragePlugin = ({env}) => {
+return ({
+        provider: 'google-cloud-storage',
+        providerOptions: {
+            bucketName: `relic-finder-${env(_ENVIRONMENT)}-media`,
+            publicFiles: true,
+            uniform: true,
+            basePath: '',
+        },
+    })
+};
+module.exports = ({env}) => ({
+    upload: getStoragePlugin(env),
+})
