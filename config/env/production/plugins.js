@@ -1,4 +1,4 @@
-getStoragePlugin = ({env}) => {
+getStoragePlugin = (env) => {
 return ({
         provider: 'google-cloud-storage',
         providerOptions: {
