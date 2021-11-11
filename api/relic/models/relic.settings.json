@@ -26,7 +26,7 @@
       "required": true
     },
     "images": {
-      "collection": "file",
+      "model": "file",
       "via": "related",
       "allowedTypes": [
         "images",
@@ -42,6 +42,16 @@
       "required": true,
       "maxLength": 4,
       "minLength": 4
+    },
+    "audio_description": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files"
+      ],
+      "plugin": "upload",
+      "required": true,
+      "pluginOptions": {}
     }
   }
 }
