@@ -8,12 +8,10 @@ ENV NODE_ENV=production
 
 COPY package*.json ./
 
-RUN yarn set version berry
-RUN yarn plugin import workspace-tools
-RUN yarn workspaces focus --production
+RUN npm install --only=production
 
 COPY . ./
 
-RUN yarn build
+RUN npm run build
 
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
