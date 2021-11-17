@@ -3,7 +3,6 @@ image: docker:latest
 cache:
   paths:
     - node_modules/
-    - .yarn
 
 stages:
   - test
@@ -13,8 +12,8 @@ test:
   stage: test
   image: node:12-alpine
   script:
-    - yarn set version berry
-    - yarn test
+    - npm install
+    - npm test
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
