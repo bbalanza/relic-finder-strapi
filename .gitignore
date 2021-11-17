@@ -112,12 +112,12 @@ exports
 *.cache
 build
 .strapi-updater.json
+.cloudsqlExport.sh
 
 ############################
 # Yarn
 ############################
 
-.cloudsqlExport.sh
 .pnp.cjs
 .pnp.loader.mjs
 .yarnrc.yml
