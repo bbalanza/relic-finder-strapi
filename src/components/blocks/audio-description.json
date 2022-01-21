@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_blocks_audio_descriptions",
+  "info": {
+    "displayName": "Audio Description",
+    "icon": "volume-up",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "src": {
+      "allowedTypes": [
+        "files"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

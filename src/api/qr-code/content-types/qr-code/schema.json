@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "qr_codes",
+  "info": {
+    "singularName": "qr-code",
+    "pluralName": "qr-codes",
+    "displayName": "QR Code",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "relic": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::relic.relic",
+      "inversedBy": "qr_code"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "relics",
+  "info": {
+    "singularName": "relic",
+    "pluralName": "relics",
+    "displayName": "Relic",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Slug": {
+      "type": "string",
+      "default": "Auto generated slug",
+      "required": false
+    },
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.audio-description",
+        "blocks.description"
+      ],
+      "required": true
+    },
+    "qr_code": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::qr-code.qr-code",
+      "inversedBy": "relic"
+    }
+  }
+}
