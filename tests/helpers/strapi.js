@@ -12,17 +12,4 @@ async function setupStrapi() {
   return instance;
 }
 
-const grantPrivilege = async (
-  roleID = 1,
-  value,
-  enabled = true,
-  policy = ""
-) => {
-  const updateObj = value
-    .match(/[a-zA-Z-]+[^.|^[\]']/gm)
-    .reduceRight((obj, next) => ({ [next]: obj }), { enabled, policy });
-  console.log()
-  return strapi.services["plugin::users-permissions.role"].updateRole(roleID, updateObj);
-};
-
-module.exports = { setupStrapi, grantPrivilege };
+module.exports = { setupStrapi };
