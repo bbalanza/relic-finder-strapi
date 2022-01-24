@@ -8,6 +8,7 @@
     "start": "strapi start",
     "build": "strapi build",
     "test": "jest --forceExit --detectOpenHandles",
+    "watch": "yarn test --watch",
     "strapi": "strapi"
   },
   "devDependencies": {
