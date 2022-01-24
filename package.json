@@ -11,8 +11,10 @@
     "strapi": "strapi"
   },
   "devDependencies": {
+    "@jest/globals": "^27.4.4",
     "jest": "^27.4.7",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^5.0.2",
+    "supertest": "^6.2.2"
   },
   "dependencies": {
     "@strapi/plugin-i18n": "4.0.5",
