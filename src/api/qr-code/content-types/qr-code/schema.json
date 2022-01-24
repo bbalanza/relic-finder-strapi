@@ -24,7 +24,10 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::relic.relic",
-      "inversedBy": "qr_code"
+      "mappedBy": "qr_code"
+    },
+    "Slug": {
+      "type": "integer"
     }
   }
 }

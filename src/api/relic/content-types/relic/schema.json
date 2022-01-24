@@ -17,11 +17,6 @@
       "required": true,
       "unique": true
     },
-    "Slug": {
-      "type": "string",
-      "default": "Auto generated slug",
-      "required": false
-    },
     "Image": {
       "type": "media",
       "multiple": false,
