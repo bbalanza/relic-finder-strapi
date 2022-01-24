@@ -1,25 +1,8 @@
-// import axios from 'axios'
+import axios from 'axios'
 
-// const qrConfig = {
-//     "config": {
-//         "body": "circle",
-//         "logo": "#facebook"
-//     }
-// }
+// TODO: Create a url string based on the QR Code Slug
+const qrCodeData = {}
 
-// const qrData = {
-//     "data": "https://www.qrcode-monkey.com"
-// }
+module.exports = {
 
-// const postData = {
-//     ...qrData,
-//     ...qrConfig,
-//     "size": 300,
-//     "download": false,
-//     "file": "svg"
-// }
-
-// const qrCode = await axios.post('https://www.qrcode-monkey.com/qr/custom', postData)
-// module.exports = {
-
-// }
+}
