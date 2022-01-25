@@ -10,6 +10,6 @@ const BASE_URL = 'https://relic-finder.gelmanmuseum.org/'
 // TODO: Set QR image as 
 module.exports = {
     beforeCreate(event) {
-        console.log(event);
+        // console.log(event);
     }
 }

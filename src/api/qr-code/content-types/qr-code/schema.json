@@ -27,7 +27,8 @@
       "mappedBy": "qr_code"
     },
     "Slug": {
-      "type": "integer"
+      "type": "integer",
+      "unique": true
     }
   }
 }
