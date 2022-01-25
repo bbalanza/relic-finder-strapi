@@ -16,6 +16,7 @@ module.exports = {
         "<rootDir>/src"
     ],
     testEnvironment: "node",
+    testRegex: "tests/app.test.js",
     globals: {
         QR_CODE_API_KEY: process.env.QR_CODE_API_KEY
     },

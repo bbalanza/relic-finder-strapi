@@ -23,3 +23,5 @@ afterAll(async () => {
 it("strapi is defined", () => {
   expect(strapi).toBeDefined();
 });
+
+require('./api/qr-code/services/urlCreator')

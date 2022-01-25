@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { urlCreator } = require('./helpers')
+// const { urlCreator } = require('./helpers/index.js.bak')
 
 const BASE_URL = 'https://relic-finder.gelmanmuseum.org/'
 // TODO: Find latest slug
