@@ -10,4 +10,8 @@ const createQRCodes = async (slugs) => {
     )
 }
 
-module.exports = {createQRCodes}
+const deleteQRCodes = async (slugs) => {
+    await strapi.db.query('api::qr-code.qr-code').deleteMany();
+}
+
+module.exports = { createQRCodes, deleteQRCodes }

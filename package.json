@@ -12,13 +12,7 @@
     "strapi": "strapi"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.8",
-    "@babel/core": "^7.16.12",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
     "@jest/globals": "^27.4.4",
-    "babel-jest": "^27.4.6",
-    "babel-loader": "^8.2.3",
     "jest": "^27.4.7",
     "sqlite3": "^5.0.2",
     "supertest": "^6.2.2"
@@ -29,7 +23,8 @@
     "@strapi/strapi": "4.0.5",
     "axios": "^0.25.0",
     "dotenv": "^14.2.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "sharp": "^0.29.3"
   },
   "author": {
     "name": "A Strapi developer"

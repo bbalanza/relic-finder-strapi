@@ -1,15 +1,20 @@
-const axios = require('axios');
-// const { urlCreator } = require('./helpers/index.js.bak')
 
 const BASE_URL = 'https://relic-finder.gelmanmuseum.org/'
-// TODO: Find latest slug
-// TODO: Set the slug to the greates slug plus 1
+// DONE: Find latest slug
+// DONE: Set the slug to the greates slug plus 1
 // DONE: Create URL from slug
-// TODO: Make axios API call and create URL
-// TODO: Save QR image in Strapi Media Library
-// TODO: Set QR image as 
+// DONE: Make axios API call and create URL
+// DONE: Save QR image in Strapi Media Library
+
 module.exports = {
-    beforeCreate(event) {
-        // console.log(event);
-    }
+    async beforeCreate(event) {
+       const slug = await strapi.service('api::qr-code.qr-code').calculateNewSlug();
+       event.params.data.Slug = slug;  
+    },
+    async afterCreate(event) {
+        const {result} = event;
+        const id = result.id;
+        const slug = result.Slug;
+        await strapi.service('api::qr-code.qr-code').createQRCodeImage(id, slug)
+    },
 }

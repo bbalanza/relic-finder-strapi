@@ -1,37 +1,40 @@
 'use strict';
 
-/**
- * qr-code service.
- */
+const helpers = require('./helpers');
 
 const { createCoreService } = require('@strapi/strapi').factories;
-const _ = require("lodash");
-
-const urlCreator = (url, slug) => {
-    const slugString = slug.toString(16).toUpperCase();
-    if (slug > _.parseInt('FFFF', 16))
-        throw "Slug is created than FFFF."
-    return url + _.padStart(slugString, 4, '0');
-}
-
-const findNewestSlug = async () => {
-    const qrCodesBySlug = await strapi.entityService.findMany('api::qr-code.qr-code', {
-        sort: { Slug: 'DESC' }
-    })
-    if (qrCodesBySlug.length != 0) {
-        const slug = qrCodesBySlug[0].Slug
-        return slug
-    }
-    return -1;
-}
 
 const calculateNewSlug = async () => {
-   const newestSlug = findNewestSlug();
-   return newestSlug + 1; 
+    const newestSlug = await helpers.findNewestSlug();
+    const newSlug = newestSlug + 1;
+    const areQRCodesEmpty = newSlug == 0;
+
+    if (areQRCodesEmpty) {
+        return newSlug + 1;
+    }
+    return newSlug;
 }
 
+const createQRCodeImage = async (qrCodeId, slug) => {
+    try {
+        const baseUrl = 'https://relic-finder.gelmanmuseum.org/'
+        const url = helpers.urlCreator(baseUrl, slug)
+        const binaryQRImage = await helpers.getQRCodeImage(url)
+        const filepath = '.tmp/' + slug + '.png'
+        await helpers.saveQRCodeImage(filepath, binaryQRImage)
+
+        const uploadData = helpers.setUpQRCodeUploadData(qrCodeId)
+        const uploadFiles = helpers.setUpQRCodeUploadFiles(filepath, slug)
+
+        await helpers.uploadQRCodeImage(uploadData, uploadFiles)
+    } catch (e) {
+        console.log(e.message)
+    }
+
+}
+
+
 module.exports = createCoreService('api::qr-code.qr-code', ({ strapi }) => ({
-    urlCreator,
-    findNewestSlug,
-    calculateNewSlug
+    calculateNewSlug,
+    createQRCodeImage,
 }));
