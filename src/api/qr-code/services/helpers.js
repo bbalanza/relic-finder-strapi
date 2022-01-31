@@ -3,13 +3,38 @@ const axios = require('axios');
 const sharp = require('sharp')
 const fs = require("fs")
 
-const urlCreator = (url, slug) => {
-    const slugString = slug.toString(16).toUpperCase();
-    if (slug > _.parseInt('FFFF', 16))
-        throw "Slug is created than FFFF."
+const isSlugValid = (slug) => {
+    const FFFF = _.parseInt('FFFF', 16);
+    if (slug > FFFF)
+        throw "Slug is greater than FFFF."
+    return true;
+}
+
+const slugCreator = (slug) => {
+    try {
+        isSlugValid(slug)
+        const slugString = slug.toString(16).toUpperCase();
+        const padding = 4
+        const pad = '0'
+        return _.padStart(slugString, padding, pad);
+    } catch (e) {
+        throw e.message
+    }
+}
+
+const isUrlValid = () => {
     if (!url || url == '')
         throw "No url to parse."
-    return url + _.padStart(slugString, 4, '0');
+    return true
+}
+
+const urlCreator = (url, slug) => {
+    try {
+        isUrlValid(url)
+        return url + slugCreator(slug)
+    }catch(e){
+        throw e.message
+    }
 }
 
 const findNewestSlug = async () => {
@@ -78,18 +103,18 @@ const getQRCodeImage = async (url) => {
 
     const response = await axios.post(qrCodeApiEndpoint, requestData, requestOptions)
     return Buffer.from(response.data);
-    
+
 }
 
 const uploadQRCodeImage = async (data, files) => {
-    try{
-    await strapi.service('plugin::upload.upload').upload({ ...data, ...files })
-    }catch(e){
+    try {
+        await strapi.service('plugin::upload.upload').upload({ ...data, ...files })
+    } catch (e) {
         throw e.message
     }
 }
 
-const setUpQRCodeUploadData = (qrCodeId) => ({data: {refId: qrCodeId, ref: 'api::qr-code.qr-code', field: 'Image' }})
-const setUpQRCodeUploadFiles = (filePath, slug) => ({files: {path: filePath, name: slug.toString() + '.png', type: 'image/png', size: fs.statSync(filePath).size}})
+const setUpQRCodeUploadData = (qrCodeId) => ({ data: { refId: qrCodeId, ref: 'api::qr-code.qr-code', field: 'Image' } })
+const setUpQRCodeUploadFiles = (filePath, slug) => ({ files: { path: filePath, name: slug.toString() + '.png', type: 'image/png', size: fs.statSync(filePath).size } })
 
 module.exports = { urlCreator, findNewestSlug, saveQRCodeImage, getQRCodeImage, uploadQRCodeImage, setUpQRCodeUploadData, setUpQRCodeUploadFiles }
