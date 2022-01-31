@@ -15,7 +15,7 @@ const calculateNewSlug = async () => {
     return newSlug;
 }
 
-const createQRCodeImage = async (qrCodeId, slug) => {
+const setQRCodeImage = async (qrCodeId, slug) => {
     try {
         const baseUrl = 'https://relic-finder.gelmanmuseum.org/'
         const url = helpers.urlCreator(baseUrl, slug)
@@ -36,5 +36,5 @@ const createQRCodeImage = async (qrCodeId, slug) => {
 
 module.exports = createCoreService('api::qr-code.qr-code', ({ strapi }) => ({
     calculateNewSlug,
-    createQRCodeImage,
+    setQRCodeImage,
 }));

@@ -1,56 +1,9 @@
-const _ = require("lodash");
 const axios = require('axios');
-const sharp = require('sharp')
 const fs = require("fs")
 
-const isSlugValid = (slug) => {
-    const FFFF = _.parseInt('FFFF', 16);
-    if (slug > FFFF)
-        throw "Slug is greater than FFFF."
-    return true;
-}
-
-const slugCreator = (slug) => {
+const saveQRCodeImageToDisk = async (filePath, imageDataBuffer) => {
     try {
-        isSlugValid(slug)
-        const slugString = slug.toString(16).toUpperCase();
-        const padding = 4
-        const pad = '0'
-        return _.padStart(slugString, padding, pad);
-    } catch (e) {
-        throw e.message
-    }
-}
-
-const isUrlValid = () => {
-    if (!url || url == '')
-        throw "No url to parse."
-    return true
-}
-
-const urlCreator = (url, slug) => {
-    try {
-        isUrlValid(url)
-        return url + slugCreator(slug)
-    }catch(e){
-        throw e.message
-    }
-}
-
-const findNewestSlug = async () => {
-    const qrCodesBySlug = await strapi.entityService.findMany('api::qr-code.qr-code', {
-        sort: { Slug: 'DESC' }
-    })
-    if (qrCodesBySlug.length != 0) {
-        const slug = qrCodesBySlug[0].Slug
-        return slug
-    }
-    return -1;
-}
-
-const saveQRCodeImage = async (filePath, imageData) => {
-    try {
-        fs.writeFileSync(filePath, imageData, 'binary')
+        fs.writeFileSync(filePath, imageDataBuffer, 'binary')
     } catch (e) {
         throw e.message
     }
@@ -87,7 +40,7 @@ const getQRCodeImage = async (url) => {
     return Buffer.from(response.data);
 }
 
-const uploadQRCodeImage = async (data, files) => {
+const uploadQRCodeImageToStrapi = async (data, files) => {
     try {
         await strapi.service('plugin::upload.upload').upload({ ...data, ...files })
     } catch (e) {
@@ -98,4 +51,4 @@ const uploadQRCodeImage = async (data, files) => {
 const setUpQRCodeUploadData = (qrCodeId) => ({ data: { refId: qrCodeId, ref: 'api::qr-code.qr-code', field: 'Image' } })
 const setUpQRCodeUploadFiles = (filePath, slug) => ({ files: { path: filePath, name: slugCreator(slug) + '.png', type: 'image/png', size: fs.statSync(filePath).size } })
 
-module.exports = { urlCreator, findNewestSlug, saveQRCodeImage, getQRCodeImage, uploadQRCodeImage, setUpQRCodeUploadData, setUpQRCodeUploadFiles }
+module.exports = {   saveQRCodeImageToDisk, getQRCodeImage, uploadQRCodeImageToStrapi, setUpQRCodeUploadData, setUpQRCodeUploadFiles }

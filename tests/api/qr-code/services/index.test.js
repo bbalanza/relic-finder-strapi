@@ -1,4 +1,4 @@
-require('./urlCreator.test')
+require('./url.test')
 require('./slugCreator.test')
 require('./getQRCodeImage.test')
 require('./saveQRCodeImage.test')
