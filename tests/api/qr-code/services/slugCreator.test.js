@@ -4,12 +4,16 @@ const { findNewestSlug } = require('api/qr-code/services/helpers')
 const SLUGS = [0, 1, 2, 3, 4, 5]
 const LAST_SLUG = SLUGS[SLUGS.length - 1]
 
+afterEach(async () => {
+    await deleteQRCodes();
+})
 describe('Test findNewestSlug', () => {
     it('Returns the largest slug', async () => {
         await createQRCodes(SLUGS);
+        const qrCodes = await strapi.entityService.findMany('api::qr-code.qr-code');
         const newestSlug = await findNewestSlug();
-        expect(newestSlug).toEqual(LAST_SLUG)
         await deleteQRCodes();
+        expect(newestSlug).toEqual(LAST_SLUG)
     })
     it('Returns -1 if there are no QR Codes created', async () => {
         const newestSlug = await findNewestSlug();

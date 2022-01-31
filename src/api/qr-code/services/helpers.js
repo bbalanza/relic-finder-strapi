@@ -89,7 +89,7 @@ const uploadQRCodeImage = async (data, files) => {
     }
 }
 
-const setUpQRCodeUploadData = (qrCodeId) => ({data: {refId: qrCodeId, ref: 'qr-code', field: 'Image' }})
+const setUpQRCodeUploadData = (qrCodeId) => ({data: {refId: qrCodeId, ref: 'api::qr-code.qr-code', field: 'Image' }})
 const setUpQRCodeUploadFiles = (filePath, slug) => ({files: {path: filePath, name: slug.toString() + '.png', type: 'image/png', size: fs.statSync(filePath).size}})
 
 module.exports = { urlCreator, findNewestSlug, saveQRCodeImage, getQRCodeImage, uploadQRCodeImage, setUpQRCodeUploadData, setUpQRCodeUploadFiles }

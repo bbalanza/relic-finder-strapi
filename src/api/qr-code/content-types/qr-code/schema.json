@@ -24,9 +24,11 @@
       "type": "integer",
       "unique": true
     },
-    "Create": {
-      "type": "boolean",
-      "private": true
+    "relic": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::relic.relic",
+      "inversedBy": "qr_code"
     }
   }
 }
