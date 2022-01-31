@@ -1,5 +1,3 @@
 require('./url.test')
-require('./slugCreator.test')
-require('./getQRCodeImage.test')
-require('./saveQRCodeImage.test')
-require('./uploadQRCodeImage.test')
+require('./slugCalculation.test')
+require('./qrCodeImage.test')
