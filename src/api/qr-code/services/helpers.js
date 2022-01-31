@@ -52,7 +52,7 @@ const saveQRCodeImage = async (filePath, imageData) => {
     try {
         fs.writeFileSync(filePath, imageData, 'binary')
     } catch (e) {
-        throw new Error(e.message)
+        throw e.message
     }
 }
 
@@ -69,41 +69,22 @@ const getQRCodeImage = async (url) => {
         responseType: 'arraybuffer',
         responseEncoding: 'binary'
     }
-
     const requestData = {
         data: url,
         config: {
-            body: 'rounded-pointed',
-            eye: 'frame14',
-            eyeBall: 'ball16',
-            erf1: [],
-            erf2: ['fh'],
-            erf3: ['fv'],
-            brf1: [],
-            brf2: ['fh'],
-            brf3: ['fv'],
-            bodyColor: '#5C8B29',
+            body: 'circular',
+            eye: 'frame0',
+            eyeBall: 'ball0',
+            bodyColor: '#000000',
             bgColor: '#FFFFFF',
-            eye1Color: '#3F6B2B',
-            eye2Color: '#3F6B2B',
-            eye3Color: '#3F6B2B',
-            eyeBall1Color: '#60A541',
-            eyeBall2Color: '#60A541',
-            eyeBall3Color: '#60A541',
-            gradientColor1: '#5C8B29',
-            gradientColor2: '#25492F',
-            gradientType: 'radial',
-            gradientOnEyes: false,
-            logo: ''
+            logo: 'https://storage.googleapis.com/gelman-stained-glass-museum-emblem/emblem-final-01.png'
         },
-        size: 300,
+        size: 500,
         download: false,
         file: 'png'
     }
-
     const response = await axios.post(qrCodeApiEndpoint, requestData, requestOptions)
     return Buffer.from(response.data);
-
 }
 
 const uploadQRCodeImage = async (data, files) => {
@@ -115,6 +96,6 @@ const uploadQRCodeImage = async (data, files) => {
 }
 
 const setUpQRCodeUploadData = (qrCodeId) => ({ data: { refId: qrCodeId, ref: 'api::qr-code.qr-code', field: 'Image' } })
-const setUpQRCodeUploadFiles = (filePath, slug) => ({ files: { path: filePath, name: slug.toString() + '.png', type: 'image/png', size: fs.statSync(filePath).size } })
+const setUpQRCodeUploadFiles = (filePath, slug) => ({ files: { path: filePath, name: slugCreator(slug) + '.png', type: 'image/png', size: fs.statSync(filePath).size } })
 
 module.exports = { urlCreator, findNewestSlug, saveQRCodeImage, getQRCodeImage, uploadQRCodeImage, setUpQRCodeUploadData, setUpQRCodeUploadFiles }
