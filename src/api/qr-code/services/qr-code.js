@@ -23,9 +23,10 @@ const setQRCodeImage = async (qrCodeId, slug, baseUrl) => {
 
         await helpers.saveQRCodeImageToDisk(filePath, binaryQRImage)
         await helpers.uploadQRCodeImageToStrapi(qrCodeId, slug, filePath);
+        await helpers.deleteQRCodeImageFromDisk(filePath)
 
     } catch (e) {
-        console.log(e.message)
+        throw e.message
     }
 }
 

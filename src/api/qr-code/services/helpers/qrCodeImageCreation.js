@@ -10,6 +10,14 @@ const saveQRCodeImageToDisk = async (filePath, imageDataBuffer) => {
     }
 }
 
+const deleteQRCodeImageFromDisk = async (filePath) => {
+    try{
+        fs.unlinkSync(filePath);
+    }catch(e){
+        throw e
+    }
+}
+
 const getQRCodeImage = async (url) => {
 
     const qrCodeApiEndpoint = `https://qrcode-monkey.p.rapidapi.com/qr/custom`
@@ -44,6 +52,7 @@ const getQRCodeImage = async (url) => {
 
 const setUpQRCodeUploadData = (qrCodeId) => ({ data: { refId: qrCodeId, ref: 'api::qr-code.qr-code', field: 'Image' } })
 const setUpQRCodeUploadFiles = (filePath, slug) => ({ files: { path: filePath, name: url.slugCreator(slug) + '.png', type: 'image/png', size: fs.statSync(filePath).size } })
+
 const uploadImageToStrapi = async (data, files) => {
     try {
         await strapi.service('plugin::upload.upload').upload({ ...data, ...files })
@@ -61,4 +70,4 @@ const uploadQRCodeImageToStrapi = async (qrCodeId, slug, filePath) => {
 
 
 
-module.exports = {   saveQRCodeImageToDisk, getQRCodeImage, uploadImageToStrapi, uploadQRCodeImageToStrapi, setUpQRCodeUploadData, setUpQRCodeUploadFiles }
+module.exports = {   saveQRCodeImageToDisk, getQRCodeImage, uploadImageToStrapi, uploadQRCodeImageToStrapi, setUpQRCodeUploadData, setUpQRCodeUploadFiles, deleteQRCodeImageFromDisk }
