@@ -1,15 +1,12 @@
 const { describe, it, expect } = require("@jest/globals");
-const { uploadQRCodeImageToStrapi } = require("api/qr-code/services/helpers")
+const { uploadImageToStrapi } = require("api/qr-code/services/helpers")
 const fs = require('fs')
 const helpers = require("../helpers/index")
 
 const FILE_PATH = './.tmp/test.png';
 const TEST_IMAGE_NAME= 'test.png'
 
-
-
-
-describe('Tests uploadQRCodeImageToStrapi', () => {
+describe('Tests uploadImageToStrapi', () => {
     it('Uploads a QR Code Image to the Strapi Backend', async () => {
         let qrCode = await helpers.createQRCode(1)
         const qrCodeId = qrCode.id
@@ -31,7 +28,7 @@ describe('Tests uploadQRCodeImageToStrapi', () => {
             }
         }
 
-        await uploadQRCodeImageToStrapi(data, files)
+        await uploadImageToStrapi(data, files)
         qrCode = (await strapi.entityService.findMany('api::qr-code.qr-code', {
             populate: {Image: true}
         })).pop()

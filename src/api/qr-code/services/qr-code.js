@@ -15,22 +15,18 @@ const calculateNewSlug = async () => {
     return newSlug;
 }
 
-const setQRCodeImage = async (qrCodeId, slug) => {
+const setQRCodeImage = async (qrCodeId, slug, baseUrl) => {
     try {
-        const baseUrl = 'https://relic-finder.gelmanmuseum.org/'
         const url = helpers.urlCreator(baseUrl, slug)
         const binaryQRImage = await helpers.getQRCodeImage(url)
-        const filepath = '.tmp/' + slug + '.png'
-        await helpers.saveQRCodeImage(filepath, binaryQRImage)
+        const filePath = '.tmp/' + slug + '.png'
 
-        const uploadData = helpers.setUpQRCodeUploadData(qrCodeId)
-        const uploadFiles = helpers.setUpQRCodeUploadFiles(filepath, slug)
+        await helpers.saveQRCodeImageToDisk(filePath, binaryQRImage)
+        await helpers.uploadQRCodeImageToStrapi(qrCodeId, slug, filePath);
 
-        await helpers.uploadQRCodeImage(uploadData, uploadFiles)
     } catch (e) {
         console.log(e.message)
     }
-
 }
 
 
