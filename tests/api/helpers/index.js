@@ -36,6 +36,10 @@ const deleteQRCodes = async () =>
     await lifecycleHandler(async () =>
         await strapi.db.query('api::qr-code.qr-code').deleteMany()
     )
+const deleteRelics = async () =>
+    await lifecycleHandler(async () =>
+        await strapi.db.query('api::relic.relic').deleteMany()
+    )
 
 const getQRCodeBySlug = async (slug) =>
     await lifecycleHandler(async () => {
@@ -55,7 +59,16 @@ const createRelic = async (slug) =>
         })
     )
 
-const associateQRCodeToRelic = async (relicId, qrCodeId) => 
+const createRelics = async (relicAmount) =>
+    await lifecycleHandler(async () =>
+        await Promise.all(
+            relicAmount.map(async slug =>
+                await createRelic(slug)
+            )
+        )
+    )
+
+const associateQRCodeToRelic = async (relicId, qrCodeId) =>
     await lifecycleHandler(async () =>
         await strapi.entityService.update('api::relic.relic', relicId, {
             data: {
@@ -67,4 +80,4 @@ const associateQRCodeToRelic = async (relicId, qrCodeId) =>
 
 
 
-module.exports = { createQRCodes, createQRCode, deleteQRCodes, associateQRCodeToRelic, getQRCodeBySlug, createRelic }
+module.exports = { createQRCodes, createQRCode, deleteQRCodes, associateQRCodeToRelic, getQRCodeBySlug, createRelic, createRelics, deleteRelics}

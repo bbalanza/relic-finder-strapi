@@ -1,6 +1,8 @@
 const findAvailableQRCode = async () => {
     const freeQRCodes = await strapi.entityService.findMany('api::qr-code.qr-code', {
-        sort: { Slug: 'DESC' }
+        sort: { Slug: 'DESC' },
+        populate: { relic: true },
+        filters: { relic: null }
     })
 
     if (freeQRCodes.length != 0)
@@ -14,7 +16,6 @@ const associateQRCodeToRelic = async (relicId, qrCodeId) =>
         data: {
             qr_code: qrCodeId
         },
-        populate: '*'
     })
 
-module.exports ={findAvailableQRCode}
+module.exports = { findAvailableQRCode }
