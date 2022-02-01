@@ -26,7 +26,7 @@ const setQRCodeImage = async (qrCodeId, slug, baseUrl) => {
         await helpers.deleteQRCodeImageFromDisk(filePath)
 
     } catch (e) {
-        throw e.message
+        throw e
     }
 }
 const findAvailableQRCode = async () => {
@@ -44,6 +44,6 @@ const findAvailableQRCode = async () => {
 
 module.exports = createCoreService('api::qr-code.qr-code', ({ strapi }) => ({
     calculateNewSlug,
-    findAvailableQRCode,
     setQRCodeImage,
+    findAvailableQRCode,
 }));
