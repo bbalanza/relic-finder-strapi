@@ -29,9 +29,21 @@ const setQRCodeImage = async (qrCodeId, slug, baseUrl) => {
         throw e.message
     }
 }
+const findAvailableQRCode = async () => {
+    const availableQRCodes = await strapi.entityService.findMany('api::qr-code.qr-code', {
+        sort: { Slug: 'DESC' },
+        populate: { relic: true },
+        filters: { relic: null }
+    })
 
+    if (availableQRCodes.length != 0)
+        return availableQRCodes.pop()
+
+    return null
+}
 
 module.exports = createCoreService('api::qr-code.qr-code', ({ strapi }) => ({
     calculateNewSlug,
+    findAvailableQRCode,
     setQRCodeImage,
 }));
