@@ -1,3 +1,3 @@
 require('./url.test')
 require('./slugCalculation.test')
-require('./qrCodeImage.test')
+require('./qrCodeImageCreation.test')

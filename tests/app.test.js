@@ -15,3 +15,4 @@ it("strapi is defined", () => {
 });
 
 require('./api/qr-code/services/index.test')
+require('./api/relic/services/index.test')

@@ -50,7 +50,7 @@ const getQRCodeImage = async (url) => {
     return Buffer.from(response.data);
 }
 
-const setUpQRCodeUploadData = (qrCodeId) => ({ data: { refId: qrCodeId, ref: 'api::qr-code.qr-code', field: 'Image' } })
+const setUpQRCodeUploadData = (qrCodeId) => ({ data: { refId: [qrCodeId], ref: 'api::qr-code.qr-code', field: ['Image'] } })
 const setUpQRCodeUploadFiles = (filePath, slug) => ({ files: { path: filePath, name: url.slugCreator(slug) + '.png', type: 'image/png', size: fs.statSync(filePath).size } })
 
 const uploadImageToStrapi = async (data, files) => {

@@ -1,5 +1,5 @@
 const { describe, it, expect, afterEach } = require('@jest/globals')
-const { createQRCodes, deleteQRCodes } = require('../helpers')
+const { createQRCodes, deleteQRCodes } = require('../../helpers')
 const { findNewestSlug } = require('api/qr-code/services/helpers')
 const SLUGS = [0, 1, 2, 3, 4, 5]
 const LAST_SLUG = SLUGS[SLUGS.length - 1]

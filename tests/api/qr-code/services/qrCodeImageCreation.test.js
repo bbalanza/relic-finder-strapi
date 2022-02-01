@@ -1,7 +1,7 @@
 const { describe, it, expect } = require("@jest/globals");
 const { getQRCodeImage, saveQRCodeImageToDisk, uploadImageToStrapi , deleteQRCodeImageFromDisk} = require('api/qr-code/services/helpers')
 const fs = require('fs')
-const helpers = require("../helpers/index")
+const helpers = require("../../helpers/index")
 
 const IMAGE_FILE_PATH = './.tmp/test.png';
 const TEXT_FILE_PATH = './.tmp/test.txt';
