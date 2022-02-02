@@ -1,5 +1,13 @@
+import Emblem from './extensions/emblem.png'
+
 export default {
   config: {
+    auth: {
+      logo: Emblem,
+    },
+    menu: {
+      logo: Emblem,
+    },
     locales: [
       // 'ar',
       // 'fr',
@@ -28,6 +36,7 @@ export default {
       // 'zh-Hans',
       // 'zh',
     ],
+    tutorials: false,
   },
   bootstrap(app) {
   },
