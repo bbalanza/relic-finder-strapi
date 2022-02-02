@@ -14,5 +14,6 @@ it("strapi is defined", () => {
   expect(strapi).toBeDefined();
 });
 
-require('./api/qr-code/services/index.test')
-require('./api/relic/services/index.test')
+require('./api/qr-code/services/')
+require('./api/qr-code/content-types/')
+require('./api/relic/services/')

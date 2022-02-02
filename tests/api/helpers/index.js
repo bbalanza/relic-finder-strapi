@@ -1,7 +1,6 @@
-const { result } = require("lodash");
+const { createLifecyclesProvider } = require("@strapi/database/lib/lifecycles");
 
 const lifecycleHandler = async (func) => {
-    const lifecycles = strapi.db.lifecycles
     strapi.db.lifecycles.clear()
     let result = null
     try {
@@ -9,7 +8,7 @@ const lifecycleHandler = async (func) => {
     } catch (e) {
         throw e
     }
-    strapi.db.lifecycles = lifecycles
+    strapi.db.lifecycles = createLifecyclesProvider(strapi.db)
     return result
 }
 
