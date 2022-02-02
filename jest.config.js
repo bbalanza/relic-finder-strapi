@@ -1,5 +1,3 @@
-require("dotenv").config()
-
 module.exports = {
     verbose: true,
     testPathIgnorePatterns: [
@@ -13,7 +11,4 @@ module.exports = {
     ],
     testEnvironment: "node",
     testRegex: "tests/app.test.js",
-    globals: {
-        QR_CODE_API_KEY: process.env.QR_CODE_API_KEY
-    },
 };
