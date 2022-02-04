@@ -1,5 +1,5 @@
 const { describe, it, expect } = require("@jest/globals");
-const { getQRCodeImage, saveQRCodeImageToDisk, uploadImageToStrapi , deleteQRCodeImageFromDisk} = require('api/qr-code/services/helpers')
+const { getQRCodeImage, saveQRCodeImageToDisk, uploadImageToStrapi , deleteQRCodeImageFromDisk, validateAPIKey} = require('api/qr-code/services/helpers')
 const fs = require('fs')
 const helpers = require("../../helpers/index")
 
@@ -59,5 +59,17 @@ describe('Tests uploadImageToStrapi', () => {
             populate: { Image: true }
         })).pop()
         expect(qrCode.Image.name).toEqual(TEST_IMAGE_NAME)
+    })
+})
+
+describe('Test validateAPIKey', () => {
+    it('Throws if invalid API key is given', () => {
+        const errorMessage = 'API Key not valid. Please set the appropriate API Key in the QR_CODE_API_KEY env variable.';
+        expect(() => validateAPIKey(null)).toThrow(errorMessage);
+        expect(() => validateAPIKey('')).toThrow(errorMessage);
+    })
+    it('Returns the API key if it is valid', () => {
+        const testAPIKey = 'test';
+        expect(validateAPIKey(testAPIKey)).toEqual(testAPIKey)
     })
 })

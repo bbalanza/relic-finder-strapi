@@ -26,7 +26,7 @@ const getQRCodeImage = async (url) => {
         headers: {
             'content-type': 'application/json',
             'x-rapidapi-host': 'qrcode-monkey.p.rapidapi.com',
-            'x-rapidapi-key': process.env.QR_CODE_API_KEY
+            'x-rapidapi-key': validateAPIKey(process.env.QR_CODE_API_KEY)
         },
         responseType: 'arraybuffer',
         responseEncoding: 'binary'
@@ -50,6 +50,12 @@ const getQRCodeImage = async (url) => {
     return Buffer.from(response.data);
 }
 
+const validateAPIKey = (apiKey) => {
+    if (apiKey && apiKey != '')
+        return apiKey
+    throw new Error('API Key not valid. Please set the appropriate API Key in the QR_CODE_API_KEY env variable.')
+}
+
 const setUpQRCodeUploadData = (qrCodeId) => ({ data: { refId: qrCodeId, ref: 'api::qr-code.qr-code', field: 'Image' } })
 const setUpQRCodeUploadFiles = (filePath, slug) => ({ files: { path: filePath, name: url.slugCreator(slug) + '.png', type: 'image/png', size: fs.statSync(filePath).size } })
 
@@ -57,7 +63,7 @@ const uploadImageToStrapi = async (data, files) => {
     try {
         await strapi.service('plugin::upload.upload').upload({ ...data, ...files })
     } catch (e) {
-        throw e.message
+        throw e
     }
 }
 
@@ -70,4 +76,4 @@ const uploadQRCodeImageToStrapi = async (qrCodeId, slug, filePath) => {
 
 
 
-module.exports = {   saveQRCodeImageToDisk, getQRCodeImage, uploadImageToStrapi, uploadQRCodeImageToStrapi, setUpQRCodeUploadData, setUpQRCodeUploadFiles, deleteQRCodeImageFromDisk }
+module.exports = {   saveQRCodeImageToDisk, getQRCodeImage, uploadImageToStrapi, uploadQRCodeImageToStrapi, setUpQRCodeUploadData, setUpQRCodeUploadFiles, deleteQRCodeImageFromDisk, validateAPIKey }
