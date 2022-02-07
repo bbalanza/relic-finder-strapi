@@ -6,3 +6,4 @@ Dockerfile
 .gitignore
 .gitlab-ci.yml
 cloudbuild.yaml
+config/plugins.js

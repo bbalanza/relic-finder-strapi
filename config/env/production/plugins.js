@@ -7,7 +7,7 @@ getStoragePlugin = (env) => {
                 bucketName: env('GCP_BUCKET'),
                 publicFiles: true,
                 uniform: true,
-                basePath: '',
+                basePath: "media"
             },
         }
     })

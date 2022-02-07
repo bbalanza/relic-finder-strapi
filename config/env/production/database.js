@@ -8,6 +8,10 @@ const getProductionConnection = (env) => ({
         ssl: env('DATABASE_SSL', false)
     },
     debug: false,
+    pool: {
+        min: 0,
+        max: 22,
+    }
 })
 
 module.exports = ({ env }) => ({
