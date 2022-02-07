@@ -1,6 +1,9 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest', '.' ]
+    args: [ 'build', 
+          '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest', 
+          '--cache-from', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest'
+          '.' ]
   - name: 'gcr.io/cloud-builders/docker'
     args: [ 'push', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest']
   - name: "gcr.io/cloud-builders/gcloud"
