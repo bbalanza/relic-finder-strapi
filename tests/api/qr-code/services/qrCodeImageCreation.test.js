@@ -3,8 +3,8 @@ const { getQRCodeImage, saveQRCodeImageToDisk, uploadImageToStrapi , deleteQRCod
 const fs = require('fs')
 const helpers = require("../../helpers/index")
 
-const IMAGE_FILE_PATH = './.tmp/test.png';
-const TEXT_FILE_PATH = './.tmp/test.txt';
+const IMAGE_FILE_PATH = './tests/static/test.png';
+const TEXT_FILE_PATH = './tests/static/test.txt';
 const TEST_IMAGE_NAME = 'test.png'
 const BINARY_FILE_CONTENT = 'test';
 
