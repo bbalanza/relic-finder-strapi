@@ -9,6 +9,8 @@ stages:
 test:
   stage: test
   image: node:16-alpine
+  variables:
+    QR_CODE_API_KEY: testkey
   script:
     - yarn
     - yarn test
