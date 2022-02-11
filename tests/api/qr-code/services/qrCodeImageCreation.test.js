@@ -1,5 +1,5 @@
 const { describe, it, expect } = require("@jest/globals");
-const { getQRCodeImage, saveQRCodeImageToDisk, uploadImageToStrapi , deleteQRCodeImageFromDisk, validateAPIKey} = require('api/qr-code/services/helpers')
+const { getQRCodeImage, saveQRCodeImageToDisk, uploadImageToStrapi , deleteQRCodeImageFromDisk, validateAPIKey, extractDirectory } = require('api/qr-code/services/helpers')
 const fs = require('fs')
 const helpers = require("../../helpers/index")
 
@@ -7,6 +7,15 @@ const IMAGE_FILE_PATH = './tests/static/test.png';
 const TEXT_FILE_PATH = './tests/static/test.txt';
 const TEST_IMAGE_NAME = 'test.png'
 const BINARY_FILE_CONTENT = 'test';
+
+describe('Test extractDirectory', () => {
+    it('Extracts the path from a directory', () => {
+        const dir = ".tmp/test/anotherTest/"
+        const file = "56.png"
+        const filePath = dir + file
+        expect(extractDirectory(filePath)).toEqual(dir)
+    })
+})
 
 describe('Tests deleteQRCodeImageLocally', () => {
     it('Deletes the temporary file', async () => {
