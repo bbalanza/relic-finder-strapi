@@ -14,7 +14,7 @@ const saveQRCodeImageToDisk = async (filePath, imageDataBuffer) => {
     try {
         const dir = extractDirectory(filePath)
         if(!fs.existsSync(dir))
-            fs.mkdirSync(dir)
+            fs.mkdirSync(dir, { recursive: true })
         fs.writeFileSync(filePath, imageDataBuffer, 'binary')
     } catch (e) {
         throw e.message
