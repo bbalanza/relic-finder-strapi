@@ -1,4 +1,4 @@
-getStoragePlugin = (env) => {
+const getStoragePlugin = (env) => {
     return ({
         enabled: true,
         config: {
@@ -12,6 +12,15 @@ getStoragePlugin = (env) => {
         }
     })
 };
+const configureGraphQLPlugin = () => ({
+    config: {
+      endpoint: "/graphql",
+      apolloServer: {
+        introspection: true,
+      },
+    },
+})
 module.exports = ({ env }) => ({
     upload: getStoragePlugin(env),
+    graphql: configureGraphQLPlugin(),
 })
