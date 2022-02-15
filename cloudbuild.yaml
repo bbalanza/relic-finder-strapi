@@ -1,7 +1,15 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest', '.' ]
+    entrypoint: 'bash'
+    args: ['-c', 'docker pull us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest || exit 0']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', 
+          '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest', 
+          '--cache-from', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest',
+          '.' ]
   - name: 'gcr.io/cloud-builders/docker'
     args: [ 'push', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest']
   - name: "gcr.io/cloud-builders/gcloud"
     args: ['run', 'deploy', 'strapi-${_ENVIRONMENT}', '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
+images: 
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/strapi/strapi:latest'

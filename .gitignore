@@ -82,6 +82,7 @@ ssl
 nbproject
 public/uploads/*
 !public/uploads/.gitkeep
+.vscode/
 
 ############################
 # Node.js
@@ -112,4 +113,3 @@ exports
 *.cache
 build
 .strapi-updater.json
-config/plugins.js

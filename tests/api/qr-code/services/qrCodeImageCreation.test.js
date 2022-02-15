@@ -1,12 +1,23 @@
 const { describe, it, expect } = require("@jest/globals");
-const { getQRCodeImage, saveQRCodeImageToDisk, uploadImageToStrapi , deleteQRCodeImageFromDisk, validateAPIKey} = require('api/qr-code/services/helpers')
+const { getQRCodeImage, saveQRCodeImageToDisk, uploadImageToStrapi , deleteQRCodeImageFromDisk, validateAPIKey, extractDirectory } = require('api/qr-code/services/helpers')
 const fs = require('fs')
 const helpers = require("../../helpers/index")
 
-const IMAGE_FILE_PATH = './.tmp/test.png';
-const TEXT_FILE_PATH = './.tmp/test.txt';
+const IMAGE_FILE_PATH = './tests/static/test.png';
+const NONEXISTENT_PATH = '.test/'
+const TEXT_FILE_PATH = './tests/static/test.txt';
+const NONEXISTENT_IMAGE_FILE_PATH = NONEXISTENT_PATH + 'static/test.png'
 const TEST_IMAGE_NAME = 'test.png'
 const BINARY_FILE_CONTENT = 'test';
+
+describe('Test extractDirectory', () => {
+    it('Extracts the path from a directory', () => {
+        const dir = ".tmp/test/anotherTest/"
+        const file = "56.png"
+        const filePath = dir + file
+        expect(extractDirectory(filePath)).toEqual(dir)
+    })
+})
 
 describe('Tests deleteQRCodeImageLocally', () => {
     it('Deletes the temporary file', async () => {
@@ -26,9 +37,15 @@ describe('Test getsQRCodeImage', () => {
 
 describe('Test saveQRCodeImageToDisk', () => {
     it('Saves the QR Code Image binary data as a file in .tmp', async () => {
-        await saveQRCodeImageToDisk(TEXT_FILE_PATH, BINARY_FILE_CONTENT)
-        expect(fs.existsSync(TEXT_FILE_PATH)).toBeTruthy()
-        fs.unlinkSync(TEXT_FILE_PATH)
+        await saveQRCodeImageToDisk(TEXT_FILE_PATH, BINARY_FILE_CONTENT);
+        expect(fs.existsSync(TEXT_FILE_PATH)).toBeTruthy();
+        fs.unlinkSync(TEXT_FILE_PATH);
+    })
+    it('Creates path if it is not available', async () => {
+        await saveQRCodeImageToDisk(NONEXISTENT_IMAGE_FILE_PATH, BINARY_FILE_CONTENT);
+        expect(fs.existsSync(NONEXISTENT_IMAGE_FILE_PATH)).toBeTruthy()
+        fs.rmdirSync(NONEXISTENT_PATH, {recursive: true});
+
     })
 })
 

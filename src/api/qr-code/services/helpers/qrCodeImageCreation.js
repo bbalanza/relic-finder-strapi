@@ -2,8 +2,19 @@ const axios = require('axios');
 const fs = require("fs")
 const url = require("./url")
 
+const extractDirectory = (filePath) => {
+    const pathMatcher = new RegExp(/.*\//, 'g');
+    const match = pathMatcher.exec(filePath).pop();
+    if(!match)
+        throw new Error('Path is not valid');
+    return match;
+}
+
 const saveQRCodeImageToDisk = async (filePath, imageDataBuffer) => {
     try {
+        const dir = extractDirectory(filePath)
+        if(!fs.existsSync(dir))
+            fs.mkdirSync(dir, { recursive: true })
         fs.writeFileSync(filePath, imageDataBuffer, 'binary')
     } catch (e) {
         throw e.message
@@ -76,4 +87,4 @@ const uploadQRCodeImageToStrapi = async (qrCodeId, slug, filePath) => {
 
 
 
-module.exports = {   saveQRCodeImageToDisk, getQRCodeImage, uploadImageToStrapi, uploadQRCodeImageToStrapi, setUpQRCodeUploadData, setUpQRCodeUploadFiles, deleteQRCodeImageFromDisk, validateAPIKey }
+module.exports = {   saveQRCodeImageToDisk, getQRCodeImage, uploadImageToStrapi, uploadQRCodeImageToStrapi, setUpQRCodeUploadData, setUpQRCodeUploadFiles, deleteQRCodeImageFromDisk, validateAPIKey, extractDirectory }
