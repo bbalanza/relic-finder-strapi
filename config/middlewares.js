@@ -18,7 +18,7 @@ module.exports = [
   {
     name: 'strapi::cors',
     config: {
-      origin: ['*','storage.googleapis.com'],
+      origin: ['*', 'storage.googleapis.com'],
     }
   },
   'strapi::poweredBy',
@@ -26,5 +26,6 @@ module.exports = [
   'strapi::query',
   'strapi::body',
   'strapi::favicon',
+  'strapi::session',
   'strapi::public',
 ];
