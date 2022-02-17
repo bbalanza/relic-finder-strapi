@@ -10,6 +10,10 @@ test:
   script:
     - yarn
     - yarn test
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/ 
 
 deploy:
   stage: deploy
