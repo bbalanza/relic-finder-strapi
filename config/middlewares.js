@@ -6,9 +6,10 @@ module.exports = [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          'connect-src': ["'self'", 'https:'],
-          'img-src': ["'self'", 'data:', 'blob:', 'storage.googleapis.com'],
-          'media-src': ["'self'", 'data:', 'blob:', 'storage.googleapis.com'],
+          'default-src': ["'self'", 'https://relic-finder-pilot--staging-g5x5qtyx.web.app', 'https://relic-finder.gelmanmuseum.org/'],
+          'connect-src': ["'self'", 'https:', 'https://relic-finder-pilot--staging-g5x5qtyx.web.app', 'https://relic-finder.gelmanmuseum.org/' ],
+          'img-src': ["'self'", 'data:', 'blob:', 'storage.googleapis.com', 'https://relic-finder-pilot--staging-g5x5qtyx.web.app', 'https://relic-finder.gelmanmuseum.org/'],
+          'media-src': ["'self'", 'data:', 'blob:', 'storage.googleapis.com', 'https://relic-finder-pilot--staging-g5x5qtyx.web.app', 'https://relic-finder.gelmanmuseum.org/'],
           'script-src': ["'self'", 'https://relic-finder-pilot--staging-g5x5qtyx.web.app', 'https://relic-finder.gelmanmuseum.org/'],
           'script-src-attr': ["'self'", 'https://relic-finder-pilot--staging-g5x5qtyx.web.app', 'https://relic-finder.gelmanmuseum.org/'],
         },
