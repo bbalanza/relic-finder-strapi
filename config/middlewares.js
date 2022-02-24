@@ -9,6 +9,8 @@ module.exports = [
           'connect-src': ["'self'", 'https:'],
           'img-src': ["'self'", 'data:', 'blob:', 'storage.googleapis.com'],
           'media-src': ["'self'", 'data:', 'blob:', 'storage.googleapis.com'],
+          'script-src': ["'self'", 'https://relic-finder-pilot--staging-g5x5qtyx.web.app', 'https://relic-finder.gelmanmuseum.org/'],
+          'script-src-attr': ["'self'", 'https://relic-finder-pilot--staging-g5x5qtyx.web.app', 'https://relic-finder.gelmanmuseum.org/'],
         },
       },
     },
