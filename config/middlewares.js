@@ -6,7 +6,7 @@ module.exports = [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          'default-src': ["'self'", 'https:', 'storage.googleapis.com', 'relic-finder-pilot--staging-g5x5qtyx.web.app', 'relic-finder.gelmanmuseum.org'],
+          'default-src': ["'self'", 'https:', 'data:', 'blob:', 'storage.googleapis.com', 'relic-finder-pilot--staging-g5x5qtyx.web.app', 'relic-finder.gelmanmuseum.org'],
           upgradeInsecureRequests: null,
         },
       },
