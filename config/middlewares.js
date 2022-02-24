@@ -6,9 +6,7 @@ module.exports = [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          'connect-src': ["'self'", 'https:'],
-          'img-src': ["'self'", 'data:', 'blob:', 'storage.googleapis.com'],
-          'media-src': ["'self'", 'data:', 'blob:', 'storage.googleapis.com'],
+          'default-src': ["'self'", 'https:', 'storage.googleapis.com'],
           upgradeInsecureRequests: null,
         },
       },
