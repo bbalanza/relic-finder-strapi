@@ -7,7 +7,8 @@ ENV HOST 0.0.0.0
 ENV NODE_ENV=production
 
 COPY ./package*.json ./
-RUN yarn --production 
+RUN yarn set version berry
+RUN yarn --$NODE_ENV 
 COPY . ./
 RUN yarn build
 
