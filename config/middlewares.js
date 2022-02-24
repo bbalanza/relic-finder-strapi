@@ -20,7 +20,7 @@ module.exports = [
   {
     name: 'strapi::cors',
     config: {
-      origin: ['*', 'storage.googleapis.com'],
+      origin: ['*', 'storage.googleapis.com', 'https://relic-finder-pilot--staging-g5x5qtyx.web.app', 'https://relic-finder.gelmanmuseum.org/'],
     }
   },
   'strapi::poweredBy',
