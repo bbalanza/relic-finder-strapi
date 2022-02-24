@@ -4,10 +4,11 @@ module.exports = [
     name: 'strapi::security',
     config: {
       contentSecurityPolicy: {
-        useDefaults: false,
+        useDefaults: true,
         directives: {
-          'default-src': ["'self'", 'https:', 'data:', 'blob:', 'storage.googleapis.com', 'relic-finder-pilot--staging-g5x5qtyx.web.app', 'relic-finder.gelmanmuseum.org'],
-          upgradeInsecureRequests: null,
+          'connect-src': ["'self'", 'https:'],
+          'img-src': ["'self'", 'data:', 'blob:', 'storage.googleapis.com'],
+          'media-src': ["'self'", 'data:', 'blob:', 'storage.googleapis.com'],
         },
       },
     },
