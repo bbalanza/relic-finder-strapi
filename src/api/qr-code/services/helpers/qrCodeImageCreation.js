@@ -45,12 +45,12 @@ const getQRCodeImage = async (url) => {
     const requestData = {
         data: url,
         config: {
-            body: 'circular',
+            body: 'round',
             eye: 'frame0',
             eyeBall: 'ball0',
             bodyColor: '#000000',
             bgColor: '#FFFFFF',
-            logo: 'https://storage.googleapis.com/gelman-stained-glass-museum-emblem/emblem-final-01.png',
+            logo: 'aeedda9f121284172c7d367e0c4d9d9ae286cc75.png',
             logoMode: 'clean'
         },
         size: 1000,
