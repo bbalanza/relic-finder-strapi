@@ -31,7 +31,8 @@
         "blocks.audio-description",
         "blocks.description"
       ],
-      "required": true
+      "required": true,
+      "max": 2
     },
     "qr_code": {
       "type": "relation",
