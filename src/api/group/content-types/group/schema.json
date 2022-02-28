@@ -24,7 +24,7 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::qr-code.qr-code",
-      "inversedBy": "group"
+      "mappedBy": "group"
     }
   }
 }

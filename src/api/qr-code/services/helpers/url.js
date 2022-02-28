@@ -9,21 +9,26 @@ const isValidSlug = (slug) => {
 
 const slugCreator = (slug) => {
     try {
-        isValidSlug(slug)
-        return convertSlugToString(slug)
+        intSlug = convertSlugStringToInt(slug)
+        isValidSlug(intSlug)
+        return convertIntSlugToString(intSlug)
     } catch (e) {
         throw e
     }
 }
 
-const convertSlugToString = (slug) => {
+const convertSlugStringToInt = (slug) => {
+    return _.parseInt(slug, 16)
+}
+
+const convertIntSlugToString = (slug) => {
     const slugString = slug.toString(16).toUpperCase();
     const padding = 4
     const pad = '0'
     return _.padStart(slugString, padding, pad);
 }
 
-const isSlugEmpty = (url) => {
+const isValidURL = (url) => {
     if (!url || url == '')
         throw new Error("No url to parse.")
     return true
@@ -41,11 +46,11 @@ const isGroupSlug = (slug) => {
 
 const urlCreator = (url, slug) => {
     try {
-        isSlugEmpty(url)
+        isValidURL(url)
         return url + slugCreator(slug)
     } catch (e) {
         throw e
     }
 }
 
-module.exports = { urlCreator, slugCreator, isValidSlug, isSlugEmpty, isRelicSlug, isGroupSlug }
+module.exports = { urlCreator, slugCreator, isValidSlug, isValidURL, isRelicSlug, isGroupSlug, convertSlugStringToInt, convertIntSlugToString }

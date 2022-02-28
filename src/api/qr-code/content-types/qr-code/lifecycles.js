@@ -5,7 +5,6 @@ module.exports = {
     async beforeCreate(event) {
         const slug = await strapi.service('api::qr-code.qr-code').calculateNewSlug();
         event.params.data.Slug = slug;
-        event.params.data.Slug_Name = slugCreator(slug)
     },
     async afterCreate(event) {
         const { result } = event;

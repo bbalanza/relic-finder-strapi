@@ -1,3 +1,5 @@
+const {convertSlugStringToInt} = require('./url')
+
 const findNewestSlug = async () => {
 
     const qrCodesBySlug = await strapi.entityService.findMany('api::qr-code.qr-code', {
@@ -6,7 +8,7 @@ const findNewestSlug = async () => {
 
     if (qrCodesBySlug.length != 0) {
         const slug = qrCodesBySlug[0].Slug
-        return slug
+        return convertSlugStringToInt(slug)
     }
     return -1;
 }

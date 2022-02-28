@@ -20,14 +20,6 @@
         "images"
       ]
     },
-    "Slug": {
-      "type": "integer",
-      "unique": true
-    },
-    "Slug_Name": {
-      "type": "string",
-      "unique": true
-    },
     "relic": {
       "type": "relation",
       "relation": "oneToOne",
@@ -39,6 +31,9 @@
       "relation": "oneToOne",
       "target": "api::group.group",
       "inversedBy": "qr_code"
+    },
+    "Slug": {
+      "type": "string"
     }
   }
 }

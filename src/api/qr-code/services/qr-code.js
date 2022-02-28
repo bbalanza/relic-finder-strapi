@@ -1,18 +1,17 @@
 'use strict';
-
 const helpers = require('./helpers');
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
 const calculateNewSlug = async () => {
     const newestSlug = await helpers.findNewestSlug();
-    const newSlug = newestSlug + 1;
+    let newSlug = newestSlug + 1;
     const areQRCodesEmpty = newSlug == 0;
 
     if (areQRCodesEmpty) {
-        return newSlug + 1;
+        newSlug = newSlug + 1;
     }
-    return newSlug;
+    return helpers.convertIntSlugToString(newSlug);
 }
 
 const setQRCodeImage = async (qrCodeId, slug, baseUrl) => {
@@ -36,8 +35,9 @@ const findAvailableQRCode = async () => {
         filters: { relic: null }
     })
 
-    if (availableQRCodes.length != 0)
+    if (availableQRCodes.length != 0) {
         return availableQRCodes.pop()
+    }
 
     return null
 }
