@@ -1,9 +1,9 @@
 
 const BASE_URL = 'https://relic-finder.gelmanmuseum.org/'
-const { slugCreator } = require('../../services/helpers')
+
 module.exports = {
     async beforeCreate(event) {
-        const slug = await strapi.service('api::qr-code.qr-code').calculateNewSlug();
+        const slug = await strapi.service('api::qr-code.qr-code').setQRSlug();
         event.params.data.Slug = slug;
     },
     async afterCreate(event) {

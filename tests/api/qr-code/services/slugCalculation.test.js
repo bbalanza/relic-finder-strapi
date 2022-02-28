@@ -1,6 +1,6 @@
 const { describe, it, expect, afterEach } = require('@jest/globals')
 const { createQRCodes, deleteQRCodes } = require('../../helpers')
-const { findNewestSlug, convertIntSlugToString } = require('api/qr-code/services/helpers')
+const { findNewestSlug, convertIntSlugToString, calculateNewSlug } = require('api/qr-code/services/helpers')
 const SLUGS = [0, 1, 2, 3, 4, 5]
 const LAST_SLUG = SLUGS[SLUGS.length - 1]
 
@@ -24,13 +24,13 @@ describe('Test findNewestSlug', () => {
 describe('Test calculateNewSlug', () => {
     it('Returns the proper slug', async () => {
         await createQRCodes(SLUGS);
-        const newSlug = await strapi.service('api::qr-code.qr-code').calculateNewSlug();
+        const newSlug = await calculateNewSlug();
         const correctNewSlug = LAST_SLUG + 1;
         expect(newSlug).toEqual(convertIntSlugToString(correctNewSlug))
         await deleteQRCodes();
     })
     it('Creates a slug of 0001 if there are no QR codes', async () => {
-        const newSlug = await strapi.service('api::qr-code.qr-code').calculateNewSlug();
+        const newSlug = await calculateNewSlug();
         expect(newSlug).toEqual('0001')
     })
 })

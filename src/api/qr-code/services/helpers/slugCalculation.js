@@ -1,4 +1,4 @@
-const {convertSlugStringToInt} = require('./url')
+const {convertSlugStringToInt, convertIntSlugToString} = require('./url')
 
 const findNewestSlug = async () => {
 
@@ -13,4 +13,15 @@ const findNewestSlug = async () => {
     return -1;
 }
 
-module.exports = {findNewestSlug}
+const calculateNewSlug = async () => {
+    const newestSlug = await findNewestSlug();
+    let newSlug = newestSlug + 1;
+    const areQRCodesEmpty = newSlug == 0;
+
+    if (areQRCodesEmpty) {
+        newSlug = newSlug + 1;
+    }
+    return convertIntSlugToString(newSlug);
+}
+
+module.exports = {findNewestSlug, calculateNewSlug}
