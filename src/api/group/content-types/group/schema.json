@@ -4,27 +4,34 @@
   "info": {
     "singularName": "group",
     "pluralName": "groups",
-    "displayName": "Group"
+    "displayName": "Group",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
-      "type": "string"
+    "Title": {
+      "type": "string",
+      "required": true
     },
     "Description": {
       "type": "richtext"
     },
-    "Slug": {
-      "type": "string"
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "qr_code": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::qr-code.qr-code",
-      "mappedBy": "group"
+      "inversedBy": "group"
     }
   }
 }

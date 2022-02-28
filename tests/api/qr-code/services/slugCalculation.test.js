@@ -1,5 +1,5 @@
 const { describe, it, expect, afterEach } = require('@jest/globals')
-const { createQRCodes, deleteQRCodes } = require('../../helpers')
+const { createQRCode, createQRCodes, deleteQRCodes, associateQRCodeToObject, createGroup } = require('../../helpers')
 const { findNewestSlug, convertIntSlugToString, calculateNewSlug } = require('api/qr-code/services/helpers')
 const SLUGS = [0, 1, 2, 3, 4, 5]
 const LAST_SLUG = SLUGS[SLUGS.length - 1]
@@ -10,7 +10,9 @@ afterEach(async () => {
 describe('Test findNewestSlug', () => {
     it('Returns the largest slug', async () => {
         await createQRCodes(SLUGS);
-        const qrCodes = await strapi.entityService.findMany('api::qr-code.qr-code');
+        const groupQRCode = await createQRCode("sample group");
+        const group = await createGroup("test")
+        await associateQRCodeToObject('api::group.group', group.id, groupQRCode.id)
         const newestSlug = await findNewestSlug();
         await deleteQRCodes();
         expect(newestSlug).toEqual(LAST_SLUG)

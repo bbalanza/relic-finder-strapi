@@ -3,7 +3,8 @@ const BASE_URL = 'https://relic-finder.gelmanmuseum.org/'
 
 module.exports = {
     async beforeCreate(event) {
-        const slug = await strapi.service('api::qr-code.qr-code').setQRSlug();
+        let slug = event.params.data.Slug;
+        slug = await strapi.service('api::qr-code.qr-code').setQRSlug(slug);
         event.params.data.Slug = slug;
     },
     async afterCreate(event) {

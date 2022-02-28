@@ -26,14 +26,15 @@
       "target": "api::relic.relic",
       "mappedBy": "qr_code"
     },
+    "Slug": {
+      "type": "string",
+      "required": false
+    },
     "group": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::group.group",
-      "inversedBy": "qr_code"
-    },
-    "Slug": {
-      "type": "string"
+      "mappedBy": "qr_code"
     }
   }
 }

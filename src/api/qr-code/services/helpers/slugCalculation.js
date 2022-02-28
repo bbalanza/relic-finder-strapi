@@ -1,9 +1,11 @@
-const {convertSlugStringToInt, convertIntSlugToString} = require('./url')
+const { convertSlugStringToInt, convertIntSlugToString } = require('./url')
 
 const findNewestSlug = async () => {
 
     const qrCodesBySlug = await strapi.entityService.findMany('api::qr-code.qr-code', {
-        sort: { Slug: 'DESC' }
+        sort: { Slug: 'DESC' },
+        populate: { group: true },
+        filters: { group: null }
     })
 
     if (qrCodesBySlug.length != 0) {
@@ -24,4 +26,4 @@ const calculateNewSlug = async () => {
     return convertIntSlugToString(newSlug);
 }
 
-module.exports = {findNewestSlug, calculateNewSlug}
+module.exports = { findNewestSlug, calculateNewSlug }

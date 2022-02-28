@@ -14,7 +14,7 @@ const slugCreator = (slug) => {
             isValidRelicSlug(intSlug)
             return convertIntSlugToString(intSlug)
         }
-        if (isGroupSlug){
+        if (isGroupSlug(slug)){
             return replaceWhitespaces(slug).toLowerCase()
         }
     } catch (e) {
