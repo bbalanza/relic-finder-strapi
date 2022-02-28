@@ -10,28 +10,42 @@ const isValidSlug = (slug) => {
 const slugCreator = (slug) => {
     try {
         isValidSlug(slug)
-        const slugString = slug.toString(16).toUpperCase();
-        const padding = 4
-        const pad = '0'
-        return _.padStart(slugString, padding, pad);
+        return convertSlugToString(slug)
     } catch (e) {
         throw e
     }
 }
 
-const isValidUrl = (url) => {
+const convertSlugToString = (slug) => {
+    const slugString = slug.toString(16).toUpperCase();
+    const padding = 4
+    const pad = '0'
+    return _.padStart(slugString, padding, pad);
+}
+
+const isSlugEmpty = (url) => {
     if (!url || url == '')
         throw new Error("No url to parse.")
     return true
 }
 
+const isRelicSlug = (slug) => {
+    relicRegex = RegExp(/[0-9 A-F]{4}/, 'g')
+    return relicRegex.test(slug.toString());
+}
+
+const isGroupSlug = (slug) => {
+    groupRegex = RegExp(/([a-z A-Z -])\w+/, 'g')
+    return groupRegex.test(slug)
+}
+
 const urlCreator = (url, slug) => {
     try {
-        isValidUrl(url)
+        isSlugEmpty(url)
         return url + slugCreator(slug)
-    }catch(e){
+    } catch (e) {
         throw e
     }
 }
 
-module.exports = {urlCreator, slugCreator, isValidSlug, isValidUrl}
+module.exports = { urlCreator, slugCreator, isValidSlug, isSlugEmpty, isRelicSlug, isGroupSlug }
