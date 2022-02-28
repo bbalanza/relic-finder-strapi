@@ -4,7 +4,7 @@ module.exports = {
         qrCode = await strapi.service('api::qr-code.qr-code').findAvailableQRCode();
         if (!qrCode)
             qrCode = await strapi.entityService.create('api::qr-code.qr-code', {
-                data: {Slug: 0}
+                data: {Slug: '0000'}
             })
         event.params.data.qr_code = qrCode.id 
     }

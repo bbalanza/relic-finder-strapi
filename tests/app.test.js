@@ -16,4 +16,4 @@ it("strapi is defined", () => {
 
 require('./api/qr-code/services/')
 require('./api/qr-code/content-types/')
-require('./api/relic/services/')
+require('./api/relic/content-types/')

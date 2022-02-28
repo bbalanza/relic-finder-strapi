@@ -1,6 +1,6 @@
 const _ = require("lodash");
 
-const isValidSlug = (slug) => {
+const isValidRelicSlug = (slug) => {
     const FFFF = _.parseInt('FFFF', 16);
     if (slug > FFFF)
         throw new Error("Slug is greater than FFFF.")
@@ -9,12 +9,21 @@ const isValidSlug = (slug) => {
 
 const slugCreator = (slug) => {
     try {
-        intSlug = convertSlugStringToInt(slug)
-        isValidSlug(intSlug)
-        return convertIntSlugToString(intSlug)
+        if (isRelicSlug(slug)) {
+            intSlug = convertSlugStringToInt(slug)
+            isValidRelicSlug(intSlug)
+            return convertIntSlugToString(intSlug)
+        }
+        if (isGroupSlug){
+            return replaceWhitespaces(slug).toLowerCase()
+        }
     } catch (e) {
         throw e
     }
+}
+
+const replaceWhitespaces = (string) => {
+    return string.replace(/\ /, "-")
 }
 
 const convertSlugStringToInt = (slug) => {
@@ -53,4 +62,4 @@ const urlCreator = (url, slug) => {
     }
 }
 
-module.exports = { urlCreator, slugCreator, isValidSlug, isValidURL, isRelicSlug, isGroupSlug, convertSlugStringToInt, convertIntSlugToString }
+module.exports = { urlCreator, slugCreator, isValidRelicSlug, isValidURL, isRelicSlug, isGroupSlug, convertSlugStringToInt, convertIntSlugToString, replaceWhitespaces }

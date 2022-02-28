@@ -1,19 +1,19 @@
 const { describe, it, expect } = require('@jest/globals')
-const { urlCreator, isValidSlug, isValidURL, isRelicSlug, isGroupSlug, convertSlugStringToInt} = require('api/qr-code/services/helpers')
+const { urlCreator, isValidRelicSlug, isValidURL, isRelicSlug, isGroupSlug, convertSlugStringToInt, replaceWhitespaces} = require('api/qr-code/services/helpers')
 
 const _ = require('lodash');
 const BASE_URL = 'https://example.com/';
 const RELIC_SLUG = '001F'
 const GROUP_SLUG = 'tiffany'
 
-describe('Test isValidSlug', () => {
+describe('Test isValidRelicSlug', () => {
     const validSlug = 1;
     const invalidLargeSlug = 41203948123;
-    it('Returns true if it is a valid slug', () => {
-        expect(isValidSlug(validSlug)).toEqual(true)
+    it('Returns true if it is a valid relic slug', () => {
+        expect(isValidRelicSlug(validSlug)).toEqual(true)
     })
-    it('Throws if slug is invalid', () => {
-        expect(() => isValidSlug(invalidLargeSlug)).toThrow('Slug is greater than FFFF.')
+    it('Throws if relic slug is invalid', () => {
+        expect(() => isValidRelicSlug(invalidLargeSlug)).toThrow('Slug is greater than FFFF.')
     })
 })
 
@@ -65,3 +65,9 @@ describe('Test convertStringSlugToInt', () => {
         expect(convertSlugStringToInt(RELIC_SLUG)).toEqual(31)
     })
 })
+
+describe('Test replaceWhitespaces', () => 
+    it('Correctly replaces whitespaces with hyphens', () => {
+        expect(replaceWhitespaces('tiffany windows')).toEqual('tiffany-windows')
+    })
+)
