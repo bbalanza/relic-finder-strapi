@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "groups",
+  "info": {
+    "singularName": "group",
+    "pluralName": "groups",
+    "displayName": "Group"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "Slug": {
+      "type": "string"
+    },
+    "qr_code": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::qr-code.qr-code",
+      "inversedBy": "group"
+    }
+  }
+}
