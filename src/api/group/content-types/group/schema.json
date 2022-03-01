@@ -32,6 +32,11 @@
       "relation": "oneToOne",
       "target": "api::qr-code.qr-code",
       "inversedBy": "group"
+    },
+    "relics": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::relic.relic"
     }
   }
 }

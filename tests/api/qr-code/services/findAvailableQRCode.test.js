@@ -16,8 +16,8 @@ const setup = async () => {
 }
 
 const teardown = async () => {
-    await helpers.deleteQRCodes()
-    await helpers.deleteRelics()
+    await helpers.deleteObjects('api::qr-code.qr-code')
+    await helpers.deleteObjects('api::relic.relic')
     relics = null
     qrCodes = null
 }
