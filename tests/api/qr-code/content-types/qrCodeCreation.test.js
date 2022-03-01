@@ -1,5 +1,4 @@
 const { describe, it, expect } = require("@jest/globals");
-const helpers = require("../../helpers")
 
 describe("Tests entityService.create('api::qr-code.qr-code')", () => {
     it('Creates a QR Code with the slug in the correct format', async () => {
