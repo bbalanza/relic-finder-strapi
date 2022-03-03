@@ -68,6 +68,6 @@ describe('Test convertStringSlugToInt', () => {
 
 describe('Test replaceWhitespaces', () => 
     it('Correctly replaces whitespaces with hyphens', () => {
-        expect(replaceWhitespaces('tiffany windows')).toEqual('tiffany-windows')
+        expect(replaceWhitespaces('tiffany windows are awesome')).toEqual('tiffany-windows-are-awesome')
     })
 )

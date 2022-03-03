@@ -23,7 +23,7 @@ const slugCreator = (slug) => {
 }
 
 const replaceWhitespaces = (string) => {
-    return string.replace(/\ /, "-")
+    return string.replace(/\ /g, "-")
 }
 
 const convertSlugStringToInt = (slug) => {
