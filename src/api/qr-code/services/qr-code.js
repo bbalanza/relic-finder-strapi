@@ -1,18 +1,14 @@
 'use strict';
-
+const { isRelicSlug, isGroupSlug } = require('./helpers');
 const helpers = require('./helpers');
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-const calculateNewSlug = async () => {
-    const newestSlug = await helpers.findNewestSlug();
-    const newSlug = newestSlug + 1;
-    const areQRCodesEmpty = newSlug == 0;
-
-    if (areQRCodesEmpty) {
-        return newSlug + 1;
-    }
-    return newSlug;
+const setQRSlug = async (slug) => {
+    if (isRelicSlug(slug))
+        return await helpers.calculateNewSlug()
+    if (isGroupSlug(slug))
+        return await helpers.slugCreator(slug)
 }
 
 const setQRCodeImage = async (qrCodeId, slug, baseUrl) => {
@@ -32,18 +28,19 @@ const setQRCodeImage = async (qrCodeId, slug, baseUrl) => {
 const findAvailableQRCode = async () => {
     const availableQRCodes = await strapi.entityService.findMany('api::qr-code.qr-code', {
         sort: { Slug: 'DESC' },
-        populate: { relic: true },
-        filters: { relic: null }
+        populate: { relic: true, group: true },
+        filters: { relic: null, group: null }
     })
 
-    if (availableQRCodes.length != 0)
+    if (availableQRCodes.length != 0) {
         return availableQRCodes.pop()
+    }
 
     return null
 }
 
 module.exports = createCoreService('api::qr-code.qr-code', ({ strapi }) => ({
-    calculateNewSlug,
+    setQRSlug,
     setQRCodeImage,
     findAvailableQRCode,
 }));

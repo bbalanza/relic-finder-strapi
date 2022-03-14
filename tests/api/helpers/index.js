@@ -30,15 +30,10 @@ const createQRCodes = async (slugs) =>
         )
     )
 
-
-const deleteQRCodes = async () =>
-    await lifecycleHandler(async () =>
-        await strapi.db.query('api::qr-code.qr-code').deleteMany()
-    )
-const deleteRelics = async () =>
-    await lifecycleHandler(async () =>
-        await strapi.db.query('api::relic.relic').deleteMany()
-    )
+const deleteObjects = async (uid) => 
+        await lifecycleHandler( async () => 
+            await strapi.db.query(uid).deleteMany()
+        )
 
 const getQRCodeBySlug = async (slug) =>
     await lifecycleHandler(async () => {
@@ -58,18 +53,36 @@ const createRelic = async (slug) =>
         })
     )
 
-const createRelics = async (relicAmount) =>
+const createRelics = async (slugs) =>
     await lifecycleHandler(async () =>
         await Promise.all(
-            relicAmount.map(async slug =>
+            slugs.map(async slug =>
                 await createRelic(slug)
             )
         )
     )
-
-const associateQRCodeToRelic = async (relicId, qrCodeId) =>
+const createGroup = async (title) =>
     await lifecycleHandler(async () =>
-        await strapi.entityService.update('api::relic.relic', relicId, {
+        await strapi.db.query('api::group.group').create({
+            data: {
+                Title: title
+            }
+        })
+    )
+
+const createGroups = async (titles) =>
+    await lifecycleHandler(async () =>
+        await Promise.all(
+            titles.map(async title =>
+                await createGroup(title)
+            )
+        )
+    )
+
+
+const associateQRCodeToObject = async (uid, objectId, qrCodeId) =>
+    await lifecycleHandler(async () =>
+        await strapi.entityService.update(uid, objectId, {
             data: {
                 qr_code: qrCodeId
             },
@@ -79,4 +92,4 @@ const associateQRCodeToRelic = async (relicId, qrCodeId) =>
 
 
 
-module.exports = { createQRCodes, createQRCode, deleteQRCodes, associateQRCodeToRelic, getQRCodeBySlug, createRelic, createRelics, deleteRelics}
+module.exports = { createQRCodes, createQRCode, associateQRCodeToObject, getQRCodeBySlug, createRelic, createRelics, createGroup, createGroups, deleteObjects}

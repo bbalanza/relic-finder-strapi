@@ -1,21 +1,23 @@
 {
   "kind": "collectionType",
-  "collectionName": "relics",
+  "collectionName": "groups",
   "info": {
-    "singularName": "relic",
-    "pluralName": "relics",
-    "displayName": "Relic",
+    "singularName": "group",
+    "pluralName": "groups",
+    "displayName": "Group",
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
     "Title": {
       "type": "string",
-      "required": true,
-      "unique": true
+      "required": true
+    },
+    "Description": {
+      "type": "richtext"
     },
     "Image": {
       "type": "media",
@@ -25,20 +27,16 @@
         "images"
       ]
     },
-    "Blocks": {
-      "type": "dynamiczone",
-      "components": [
-        "blocks.audio-description",
-        "blocks.description"
-      ],
-      "required": true,
-      "max": 2
-    },
     "qr_code": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::qr-code.qr-code",
-      "inversedBy": "relic"
+      "inversedBy": "group"
+    },
+    "relics": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::relic.relic"
     }
   }
 }

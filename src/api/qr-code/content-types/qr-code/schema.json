@@ -20,19 +20,21 @@
         "images"
       ]
     },
-    "Slug": {
-      "type": "integer",
-      "unique": true
-    },
-    "Slug_Name": {
-      "type": "string",
-      "unique": true
-    },
     "relic": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::relic.relic",
-      "inversedBy": "qr_code"
+      "mappedBy": "qr_code"
+    },
+    "Slug": {
+      "type": "string",
+      "required": false
+    },
+    "group": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::group.group",
+      "mappedBy": "qr_code"
     }
   }
 }

@@ -1,18 +1,20 @@
 const { describe, it, expect, afterEach } = require('@jest/globals')
-const { createQRCodes, deleteQRCodes } = require('../../helpers')
-const { findNewestSlug } = require('api/qr-code/services/helpers')
+const { createQRCode, createQRCodes, deleteObjects, associateQRCodeToObject, createGroup } = require('../../helpers')
+const { findNewestSlug, convertIntSlugToString, calculateNewSlug } = require('api/qr-code/services/helpers')
 const SLUGS = [0, 1, 2, 3, 4, 5]
 const LAST_SLUG = SLUGS[SLUGS.length - 1]
 
 afterEach(async () => {
-    await deleteQRCodes();
+    await deleteObjects('api::qr-code.qr-code');
 })
 describe('Test findNewestSlug', () => {
     it('Returns the largest slug', async () => {
         await createQRCodes(SLUGS);
-        const qrCodes = await strapi.entityService.findMany('api::qr-code.qr-code');
+        const groupQRCode = await createQRCode("sample group");
+        const group = await createGroup("test")
+        await associateQRCodeToObject('api::group.group', group.id, groupQRCode.id)
         const newestSlug = await findNewestSlug();
-        await deleteQRCodes();
+        await deleteObjects('api::qr-code.qr-code');
         expect(newestSlug).toEqual(LAST_SLUG)
     })
     it('Returns -1 if there are no QR Codes created', async () => {
@@ -24,13 +26,13 @@ describe('Test findNewestSlug', () => {
 describe('Test calculateNewSlug', () => {
     it('Returns the proper slug', async () => {
         await createQRCodes(SLUGS);
-        const newSlug = await strapi.service('api::qr-code.qr-code').calculateNewSlug();
+        const newSlug = await calculateNewSlug();
         const correctNewSlug = LAST_SLUG + 1;
-        expect(newSlug).toEqual(correctNewSlug)
-        await deleteQRCodes();
+        expect(newSlug).toEqual(convertIntSlugToString(correctNewSlug))
+        await deleteObjects('api::qr-code.qr-code');
     })
-    it('Creates a slug of 1 if there are no QR codes', async () => {
-        const newSlug = await strapi.service('api::qr-code.qr-code').calculateNewSlug();
-        expect(newSlug).toEqual(1)
+    it('Creates a slug of 0001 if there are no QR codes', async () => {
+        const newSlug = await calculateNewSlug();
+        expect(newSlug).toEqual('0001')
     })
 })
